@@ -1,5 +1,6 @@
 package com.secure.notes.dtos;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.secure.notes.models.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
