@@ -1,8 +1,10 @@
 package com.secure.notes.controllers;
 
 import com.secure.notes.models.Note;
+import com.secure.notes.security.response.MessageResponse;
 import com.secure.notes.services.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -40,9 +42,10 @@ public class NoteController {
     }
 
     @DeleteMapping("/{noteId}")
-    public void deleteNote(@PathVariable Long noteId,
-                           @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<MessageResponse> deleteNote(@PathVariable Long noteId,
+                                                      @AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
         noteService.deleteNoteForUser(noteId, username);
+        return ResponseEntity.ok(new MessageResponse("Note successfully deleted"));
     }
 }
